@@ -59,8 +59,10 @@ def stations():
 # Create the temperature observations route
 @app.route("/api/v1.0/tobs")
 
+
 # Create the monthly temp function
 def temp_monthly():
+    temps = []
     prev_year = dt.date(2017, 8, 23) - dt.timedelta(days=365)
     results = session.query(Measurement.tobs).\
         filter(Measurement.station == 'USC00519281').\
@@ -72,6 +74,8 @@ def temp_monthly():
 @app.route("/api/v1.0/temp/<start>")
 @app.route("/api/v1.0/temp/<start>/<end>")
 
+
+
 # Create a stats function
 def stats(start=None, end=None):
     sel = [func.min(Measurement.tobs), func.avg(Measurement.tobs), func.max(Measurement.tobs)]
@@ -80,7 +84,7 @@ def stats(start=None, end=None):
         results = session.query(*sel).\
             filter(Measurement.date >= start).all()
         temps = list(np.ravel(results))
-    return jsonify(temps=temps)
+        return jsonify(temps)
 
     results = session.query(*sel).\
         filter(Measurement.date >= start).\
