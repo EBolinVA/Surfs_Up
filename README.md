@@ -9,6 +9,7 @@ In order to secure funding, I'll provide the investor with insight into the weat
 
 ## Results: 
 
+### Query the SQLite database
 -  Pull all daily temps in each of the months June and December. 
 Below is the code for obtaining June temperatures from the sqlite database:
 
@@ -16,6 +17,7 @@ Below is the code for obtaining June temperatures from the sqlite database:
     results = session.query(Measurement.date, Measurement.tobs).\
         filter(extract('month', Measurement.date) == 6).all()
     ```
+### Provide summary statistics of daily temperatures
 -  Determine summary statistics using pandas DataFrame of the extracted lists: 
 
     ```
@@ -32,6 +34,7 @@ Below is the code for obtaining June temperatures from the sqlite database:
 
 --  1517 daily temperatures were analyzed for the month of December. The minimum temp is 56, the maximum temp is 83 and the average is a balmy 71.
 
+### Visualize the daily temperatures using Matplotlib
 -  Plot temperatures and print results in a histogram for each month:
 
     ```
@@ -53,11 +56,28 @@ Below is the code for obtaining June temperatures from the sqlite database:
 
 ## Summary: Provide a high-level summary of the results and two additional queries that you would perform to gather more weather data for June and December.
 
-The low temperatures for our location are 56-64 degrees. The high temperatures are 83 and 85 degrees. These temperatures can be considered 
+The low temperatures for our location are 56-64 degrees. The high temperatures are 83 and 85 degrees. These temperatures can be considered temperate and desirable for most vacationers. 
 
 It appears from both the summary statistics and the visual depiction in the histogram that temperatures are not vastly different when comparing June and December in our Hawaii location. Therefore, the weather remains consistent when considering both June and December temperatures. 
 
 ### Additional queries that would provide more weather data for June and December are following: 
+
+- inches of rainfall per June, and per December
+
+In order to get summary statistics of rainfall for June, I refactored the code for June temperatures as such:
+ ```
+ Prcp_results = []
+ Prcp_results = session.query(Measurement.date, Measurement.prcp).\
+        filter(extract('month', Measurement.date) == 6).all()
+
+ print(Prcp_results)
+ ```
+The resulting statistics show little to no rainfall most days for June.
+![image of summary statistics for June precipitation](https://github.com/EBolinVA/Surfs_Up/blob/main/Resources/image%20files/June_prcp_stats.png)
+
+Similarly, there is little rainfall in December, although it appears to be a little rainier than June.
+![image of summary statistics for December precipitation](https://github.com/EBolinVA/Surfs_Up/blob/main/Resources/image%20files/December_prcp_stats.png)
+
 
 - average summer temperature:
 ```
@@ -74,15 +94,3 @@ Winter_dates = session.query(Measurement.date, Measurement.tobs).\
 
 print(Winter_dates)
 ``` 
-- inches of rainfall per June, and per December
-In order to get summary statistics of rainfall for June, I refactored the code for June temperatures as such:
- ```
- Prcp_results = []
- Prcp_results = session.query(Measurement.date, Measurement.prcp).\
-        filter(extract('month', Measurement.date) == 6).all()
-
- print(Prcp_results)
- ```
-The resulting statistics show little to no rainfall most days for June.
-![image of summary statistics for June precipitation](https://github.com/EBolinVA/Surfs_Up/blob/main/Resources/image%20files/June_prcp_stats.png)
-
