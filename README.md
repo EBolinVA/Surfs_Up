@@ -1,6 +1,5 @@
 # Surfs_Up
   
-
 ## Overview of the analysis: 
 
 I love surfing and milkshakes! This is a Business Plan Analysis for a surf &amp; shake shack to be built in Hawaii, analyzing weather using SQLite, SQLAlchemy, and Flask database structures and querying methods. Python code is written and executed in a Jupyter notebook. I'll provide visualization by plotting the results of the precipitation analysis using Matplotlib.
@@ -25,14 +24,14 @@ Below is the code for obtaining June temperatures from the sqlite database:
     ```
 ![image of June summary statistics](https://github.com/EBolinVA/Surfs_Up/blob/main/Resources/image%20files/June_temps.png)
 
---  1700 daily temperatures were analyzed for the month of June. The minimum temp is 64, the maximum temp is 85 and the average is a balmy 75.
+* 1700 daily temperatures were analyzed for the month of June. The minimum temp is 64, the maximum temp is 85 and the average is a balmy 75.
 
     ```
     Dec_df.describe()
     ```
 ![image of December summary statistics](https://github.com/EBolinVA/Surfs_Up/blob/main/Resources/image%20files/December_temps.png)
 
---  1517 daily temperatures were analyzed for the month of December. The minimum temp is 56, the maximum temp is 83 and the average is a balmy 71.
+* 1517 daily temperatures were analyzed for the month of December. The minimum temp is 56, the maximum temp is 83 and the average is a balmy 71.
 
 ### Visualize the daily temperatures using Matplotlib
 -  Plot temperatures and print results in a histogram for each month:
@@ -54,7 +53,7 @@ Below is the code for obtaining June temperatures from the sqlite database:
     ```
 ![image of December temperatures histogram](https://github.com/EBolinVA/Surfs_Up/blob/main/Resources/image%20files/December_temps_histogram.png)
 
-## Summary: Provide a high-level summary of the results and two additional queries that you would perform to gather more weather data for June and December.
+## Summary: 
 
 The low temperatures for our location are 56-64 degrees. The high temperatures are 83 and 85 degrees. These temperatures can be considered temperate and desirable for most vacationers. 
 
@@ -78,19 +77,3 @@ The resulting statistics show little to no rainfall most days for June.
 Similarly, there is little rainfall in December, although it appears to be a little rainier than June.
 ![image of summary statistics for December precipitation](https://github.com/EBolinVA/Surfs_Up/blob/main/Resources/image%20files/December_prcp_stats.png)
 
-
-- average summer temperature:
-```
-Summer_dates = session.query(Measurement.date, Measurement.tobs).\
-        filter(extract('month', Measurement.date.between(6,8).all()
-
-print(Summer_dates)
-```
-- average winter temperature:
-```
-Winter_dates = session.query(Measurement.date, Measurement.tobs).\
-        filter(extract('month', Measurement.date = 12.\
-        filter(extract('month', Measurement.date.between (1,2).all()
-
-print(Winter_dates)
-``` 
